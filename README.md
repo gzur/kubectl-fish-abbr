@@ -23,6 +23,8 @@ This file and the rest of the repository is based on [ahtmed/kubectl-aliases](ht
 
 ### Examples
 
+[![asciicast](demo.gif)](https://asciinema.org/a/4ylDea4mKFlFSp5nHurnkZwnV)
+
 Some of the generated abbreviations are:
 
 ```fish
@@ -45,7 +47,7 @@ abbr -a -g -- kgsvcslwn 'watch kubectl get service --show-labels --namespace'
 abbr -a -g -- kgwf 'watch kubectl get -f'
 ```
 
-See [the full list](conf.d/kubectl-fish-abbr).
+See [the full list](conf.d/kubectl-fish-abbr.fish).
 
 ### Installation
 
