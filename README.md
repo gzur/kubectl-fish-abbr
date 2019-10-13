@@ -1,49 +1,58 @@
-# kubectl-aliases
+<!---
+# Copyright 2019 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file was edited by Simon Johansson on 2019-10-13.
+-->
 
-This repository contains [a script](generate_aliases.py) to generate hundreds of
-convenient kubectl aliases programmatically.
+# kubectl-fish-abbr
+
+This adds many convenient kubectl abbrevations to your fish shell.
+This file and the rest of the repository is based on [ahtmed/kubectl-aliases](https://github.com/ahmetb/kubectl-aliases).
 
 ### Examples
 
-Some of the 800 generated aliases are:
+Some of the generated abbreviations are:
 
-```sh
-alias k='kubectl'
-alias kg='kubectl get'
-alias kgpo='kubectl get pod'
+```fish
+abbr -a -g -- k 'kubectl'
+abbr -a -g -- kg 'kubectl get'
+abbr -a -g -- kgpo 'kubectl get pod'
 
-alias ksysgpo='kubectl --namespace=kube-system get pod'
+abbr -a -g -- ksysgpo 'kubectl --namespace=kube-system get pod'
 
-alias krm='kubectl delete'
-alias krmf='kubectl delete -f'
-alias krming='kubectl delete ingress'
-alias krmingl='kubectl delete ingress -l'
-alias krmingall='kubectl delete ingress --all-namespaces'
+abbr -a -g -- krm 'kubectl delete'
+abbr -a -g -- krmf 'kubectl delete -f'
+abbr -a -g -- krming 'kubectl delete ingress'
+abbr -a -g -- krmingl 'kubectl delete ingress -l'
+abbr -a -g -- krmingall 'kubectl delete ingress --all-namespaces'
 
-alias kgsvcoyaml='kubectl get service -o=yaml'
-alias kgsvcwn='watch kubectl get service --namespace'
-alias kgsvcslwn='watch kubectl get service --show-labels --namespace'
+abbr -a -g -- kgsvcoyaml 'kubectl get service -o=yaml'
+abbr -a -g -- kgsvcwn 'watch kubectl get service --namespace'
+abbr -a -g -- kgsvcslwn 'watch kubectl get service --show-labels --namespace'
 
-alias kgwf='watch kubectl get -f'
-...
+abbr -a -g -- kgwf 'watch kubectl get -f'
 ```
 
-See [the full list](.kubectl_aliases).
+See [the full list](conf.d/kubectl-fish-abbr).
 
 ### Installation
 
-You can directly download the [`.kubectl_aliases` file](https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases)
-and save it in your $HOME directory, then edit your .bashrc/.zshrc file with:
+Install with [fisher](https://github.com/jorgebucaran/fisher).
 
-```sh
-[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
-```
-
-**Print the full command before running it:** Add this to your `.bashrc` or
-`.zshrc` file:
-
-```sh
-function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
+```fish
+fisher add DrPhil/kubectl-fish-abbr
 ```
 
 ### Syntax explanation
@@ -73,23 +82,11 @@ function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
   
 ### FAQ
 
-- **Doesn't this slow down my shell start up?** Sourcing the file that contains
-~500 aliases takes about 30-45 milliseconds in my shell (zsh). I don't think
-it's a big deal for me. Measure it with `echo $(($(date +%s%N)/1000000))`
-command yourself in your .bashrc/.zshrc.
+- **Doesn't this slow down my shell start up?** It probably does. This measurement suggests that it will steal around 250ms from my life on each shell-startup. YMMV
 
-- **Can I add more Kubernetes resource types to this?** Please consider forking
-  this repo and adding the resource types you want. Not all resource types are
-  used by everyone, and adding more resource types slows down shell initialization
-  see above).
+```console
+$ source conf.d/kubectl-aliases.fish
+$ echo $CMD_DURATION
+244
 
-- **Where can I find PowerShell aliases for kubectl?** There’s a fork of this
-  [here](https://github.com/shanoor/kubectl-aliases-powershell).
-
-### Authors
-
-- [@ahmetb](https://twitter.com/ahmetb)
-
------
-
-This is not an official Google project.
+```
