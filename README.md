@@ -54,7 +54,7 @@ See [the full list](conf.d/kubectl-fish-abbr.fish).
 Install with [fisher](https://github.com/jorgebucaran/fisher).
 
 ```fish
-fisher add DrPhil/kubectl-fish-abbr
+fisher install DrPhil/kubectl-fish-abbr
 ```
 
 ### Syntax explanation
